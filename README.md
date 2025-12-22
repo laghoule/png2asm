@@ -34,9 +34,9 @@ The tool extracts the color index for each pixel from the input PNG and outputs 
         ./png2asm
         ```
     *   **Specifying a custom input file**:
-        Use the `-file` flag to provide the path to your PNG image:
+        Use the `-src` flag to provide the path to your PNG image:
         ```bash
-        ./png2asm -file path/to/your_image.png
+        ./png2asm -src path/to/your_image.png
         ```
 
     The tool will generate a file named `sprite.inc` in the current directory.
