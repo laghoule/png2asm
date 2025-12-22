@@ -57,3 +57,12 @@ my_sprite LABEL BYTE
     DB 48,49,50,51,52,53,54,55
     DB 56,57,58,59,60,61,62,63
 ```
+
+## GIMP Palette
+
+The `gimp` directory contains two files that can be used with [GIMP](https://www.gimp.org/) to create images with the correct VGA palette.
+
+*   `VGA.gpl`: This is the palette file. You can install it in GIMP by copying it to `~/.config/GIMP/2.10/palettes/`.
+*   `vga.icc`: This is the color profile. You can install it in GIMP by copying it to `~/.config/GIMP/2.10/profiles/`.
+
+Using these files will help ensure that your images use the standard VGA 256-color palette, which is required for this tool.
