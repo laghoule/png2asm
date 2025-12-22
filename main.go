@@ -18,19 +18,17 @@ func main() {
 	dstName := flag.String("dst", "sprite.inc", "Path to the output .inc file")
 	flag.Parse()
 
-	fmt.Printf("png2asm\nversion: %s, git commit: %s\n", version, gitCommit)
+	fmt.Printf("png2asm version: %s, git commit: %s\n", version, gitCommit)
 
 	reader, err := os.Open(*srcName)
 	if err != nil {
-		fmt.Printf("Error: Could not open image (%v)\n", err)
-		return
+		exitWithError(fmt.Sprintf("Could not open image (%v)", err))
 	}
 	defer reader.Close()
 
 	img, _, err := image.Decode(reader)
 	if err != nil {
-		fmt.Printf("Error: Could not decode PNG (%v)\n", err)
-		return
+		exitWithError(fmt.Sprintf("Could not decode PNG (%v)", err))
 	}
 
 	bounds := img.Bounds()
@@ -38,8 +36,7 @@ func main() {
 
 	outFile, err := os.Create(*dstName)
 	if err != nil {
-		fmt.Printf("Error: Could not create .inc file (%v)\n", err)
-		return
+		exitWithError(fmt.Sprintf("Could not create .inc file (%v)", err))
 	}
 	defer outFile.Close()
 
@@ -53,7 +50,7 @@ func main() {
 			if pimg, ok := img.(*image.Paletted); ok {
 				index = pimg.ColorIndexAt(x, y)
 			} else {
-				panic("Image is not in indexed mode. Please use a PNG image with a 256-color palette.")
+				exitWithError("Image is not in indexed mode. Please use a PNG image with a 256-color palette.")
 			}
 
 			if x == width-1 {
@@ -66,4 +63,9 @@ func main() {
 	}
 
 	fmt.Printf("Conversion complete! File generated: sprite.inc (%dx%d)\n", height, height)
+}
+
+func exitWithError(msg string) {
+	fmt.Printf("Error: %s\n", msg)
+	os.Exit(1)
 }
