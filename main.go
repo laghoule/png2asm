@@ -62,7 +62,7 @@ func main() {
 		fmt.Fprintln(outFile)
 	}
 
-	fmt.Printf("Conversion complete! File generated: sprite.inc (%dx%d)\n", height, height)
+	fmt.Printf("Conversion complete! File generated: sprite.inc (%dx%d)\n", width, height)
 }
 
 func exitWithError(msg string) {
