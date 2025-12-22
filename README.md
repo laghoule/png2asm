@@ -13,7 +13,7 @@ The tool extracts the color index for each pixel from the input PNG and outputs 
 
 ## Requirements
 
-*   **Go Language**: You need to have Go installed on your system.
+*   **Go Language**: You need to have Go installed on your system (if you want to build from source).
 *   **256-color Paletted PNG Image**: The input image *must* be a PNG with a 256-color palette (indexed color mode). The tool will terminate with an error if a non-paletted image is provided.
 
 ## Usage
