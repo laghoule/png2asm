@@ -18,7 +18,7 @@ func main() {
 	dstName := flag.String("dst", "sprite.inc", "Path to the output .inc file")
 	flag.Parse()
 
-	fmt.Printf("Version: %s, Git Commit: %s\n", version, gitCommit)
+	fmt.Printf("png2asm\nversion: %s, git commit: %s\n", version, gitCommit)
 
 	reader, err := os.Open(*srcName)
 	if err != nil {
