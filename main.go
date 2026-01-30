@@ -44,7 +44,7 @@ func main() {
 	fmt.Fprintln(outFile, "my_sprite LABEL BYTE")
 
 	for y := range height {
-		fmt.Fprintf(outFile, "    DB ")
+		fmt.Fprintf(outFile, "  DB ")
 		for x := range width {
 			var index uint8
 			if pimg, ok := img.(*image.Paletted); ok {
