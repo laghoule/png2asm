@@ -31,6 +31,11 @@ func main() {
 		exitWithError(fmt.Sprintf("Could not decode PNG (%v)", err))
 	}
 
+	pImg, ok := img.(*image.Paletted)
+	if !ok {
+		exitWithError("Image is not in indexed mode. Please use a PNG image with a 256-color palette.")
+	}
+
 	bounds := img.Bounds()
 	width, height := bounds.Dx(), bounds.Dy()
 
@@ -47,12 +52,7 @@ func main() {
 		fmt.Fprintf(outFile, "  DB ")
 		for x := range width {
 			var index uint8
-			if pimg, ok := img.(*image.Paletted); ok {
-				index = pimg.ColorIndexAt(x, y)
-			} else {
-				exitWithError("Image is not in indexed mode. Please use a PNG image with a 256-color palette.")
-			}
-
+			index = pImg.ColorIndexAt(x, y)
 			if x == width-1 {
 				fmt.Fprintf(outFile, "%d", index)
 			} else {
@@ -62,7 +62,7 @@ func main() {
 		fmt.Fprintln(outFile)
 	}
 
-	fmt.Printf("Conversion complete! File generated: sprite.inc (%dx%d)\n", width, height)
+	fmt.Printf("Conversion complete! File generated: %s (%dx%d)\n", *dstName, width, height)
 }
 
 func exitWithError(msg string) {
